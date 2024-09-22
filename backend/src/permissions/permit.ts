@@ -19,10 +19,10 @@ export function canEditProject(user: IUser, userId: string): boolean {
 }
 
 // Function to check if the user can delete the project
-export function canDeleteProject(user: IUser, userId: string): boolean {
+export function canDeleteProject(user: IUser, projectId: string): boolean {
     // Convert user._id to a string for comparison
     const userIdString = new Types.ObjectId(user._id).toString();
-    // console.log("permit is comparing",userIdString)
-    return user.role === ROLE.ADMIN ||userIdString=== userId;
+    console.log("permit is comparing",userIdString)
+    return user.role === ROLE.ADMIN || user.projects.some(p => p.id === projectId);
 
 }
