@@ -92,7 +92,7 @@ async function login(req:LoginRequest,res:Response):Promise<Response>{
 			return res.status(400).json({ success: false, message: "Invalid credentials" });
 		}
 
-        generateTokenAndSetCookie(user._id, res);
+    const token=  generateTokenAndSetCookie(user._id, res);
 
         res.status(200).json({
 			success: true,
@@ -100,6 +100,7 @@ async function login(req:LoginRequest,res:Response):Promise<Response>{
 				...user.toObject(),
 				password: "",
 			},
+      tok:token
 		});
 
     } catch (error) {

@@ -19,8 +19,9 @@ router.post("/add", protectRoute, authAddProject, addProject);
 
 router.get("/project/:userId/:projectId",protectRoute,authFindProject,searchProject)
 
-router.get("/projects",protectRoute,authFindProject,searchAllProject)
-// router.delete("/delete",protectRoute,authDeleteProject,deleteProject)// this is using req.body
+// router.get("/projects/:userId",protectRoute,authFindProject,searchAllProject)
+// router.get("/projects/:userId",searchAllProject)
+router.delete("/delete",protectRoute,authDeleteProject,deleteProject)// this is using req.body
 
 router.delete("/delete/:userId/:projectId", protectRoute, authDeleteProject, deleteProject);//this is using params
 

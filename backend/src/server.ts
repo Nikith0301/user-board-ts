@@ -1,4 +1,6 @@
 // src/server.ts
+
+import cors from "cors"
 import express, { NextFunction, Request, Response } from 'express';
 import { connectDB } from './config/db';
 import {ROLE, users} from "./data"
@@ -24,6 +26,11 @@ const port = ENV_VARS.PORT||3000;
 
 
 const app = express();
+app.use(cors({
+	origin: 'http://localhost:5173', 
+	
+	credentials: true, // Allow cookies to be sent and received
+  }))
 // Middleware to parse cookies
 app.use(cookieParser());
 app.use(express.json());
