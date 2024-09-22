@@ -122,14 +122,6 @@ try {
 }
 
 
-async function authCheck(req:Request,res:Response){
-
-    try {
-        
-    } catch (error) {
-        console.log("Error in authCheck controller", error.message);
-		res.status(500).json({ success: false, message: "Internal server error" });
-    }
-}
+// async function authCheck(req:Request,res:Res){}
 
 export { signup ,login,logout};

@@ -6,8 +6,10 @@ import projectRouter from "./routes/project.route";
 import { authUser,authRole } from './middleware/basicAuth';
 import { ENV_VARS } from './config/envVars';
 
-import authRoutes from "../src/routes/auth.route";
+import cookieParser from "cookie-parser";
 
+import authRoutes from "../src/routes/auth.route";
+import searchRoutes from"../src/routes/search.route"
  interface User{
   id: number;
   name: string;
@@ -18,8 +20,12 @@ interface UserRequest extends Request{
   user?:User
 }
 const port = ENV_VARS.PORT||3000;
-const app = express();
 
+
+
+const app = express();
+// Middleware to parse cookies
+app.use(cookieParser());
 app.use(express.json());
 /////////////////////////////////////////////////////////////
 
@@ -54,6 +60,7 @@ app.use(express.json());
 /////////////////////////////////////////////////////
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/search/",searchRoutes)
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
