@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",             // Use ESNext for module system
+    "moduleResolution": "node",     // Resolve modules like Node.js
+    "target": "ES2020",             // Target modern JavaScript
+    "esModuleInterop": true,        // Enable interoperability with CommonJS
+    "skipLibCheck": true,           // Skip type checking of libraries (optional but useful)
+    "allowSyntheticDefaultImports": true
+  }
+}
