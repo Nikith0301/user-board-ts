@@ -1,17 +1,21 @@
 // src/server.ts
-
+// npx tsx watch src/server.ts
 import cors from "cors"
 import express, { NextFunction, Request, Response } from 'express';
 import { connectDB } from './config/db';
 import {ROLE, users} from "./data"
 import projectRouter from "./routes/project.route";
+
+
+import userRoutes from "./routes/users.route"
+import authRoutes from "../src/routes/auth.route";
+import searchRoutes from"../src/routes/search.route"
+
 import { authUser,authRole } from './middleware/basicAuth';
 import { ENV_VARS } from './config/envVars';
 
 import cookieParser from "cookie-parser";
 
-import authRoutes from "../src/routes/auth.route";
-import searchRoutes from"../src/routes/search.route"
  interface User{
   id: number;
   name: string;
@@ -68,6 +72,7 @@ app.use(express.json());
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/search/",searchRoutes)
+app.use("/api/v1/users",userRoutes)
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
