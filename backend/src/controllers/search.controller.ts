@@ -77,7 +77,7 @@ if (!project) {
 export async function searchAllProject(req: Request, res: Response): Promise<Response> {
   try {
     const { userId } = req.params; // Assuming userId is passed in the request body
-    console.log("gotee",userId);
+    // console.log("gotee",userId);
 
     const user = await User.findById(userId);
 

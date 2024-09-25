@@ -13,6 +13,11 @@ interface AuthenticatedRequest extends Request {
   user?: any;
 }
 
+
+
+//! <- this mark is from greatcomment extension and makes the comment red and 
+//! this function verifies token and sends user see green comment around line 49
+
 export const protectRoute = async (req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<Response | void> => {
   try {
     // Get the token from cookies
@@ -24,6 +29,7 @@ export const protectRoute = async (req: AuthenticatedRequest, res: Response, nex
     }
 
     // Verify and decode the token
+    console.log("protectRoutes is verifying token")
     const decoded = jwt.verify(token, ENV_VARS.JWT_SECRET) as JwtPayload;
 
     // If the token is invalid
@@ -31,7 +37,7 @@ export const protectRoute = async (req: AuthenticatedRequest, res: Response, nex
       return res.status(401).json({ success: false, message: "Unauthorized - Invalid Token" });
     }
 
-    // Find the user by ID and exclude the password field
+    // *Find the user by ID and exclude the password field
     const user = await User.findById(decoded.userId).select("-password");
 
     // If the user is not found
@@ -39,7 +45,7 @@ export const protectRoute = async (req: AuthenticatedRequest, res: Response, nex
       return res.status(404).json({ success: false, message: "User not found" });
     }
 
-    // Attach the user to the request object
+    // *Attach the user to the request object
     req.user = user;
 
     // Call the next middleware

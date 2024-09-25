@@ -4,6 +4,10 @@ import { Request, Response } from "express";
 import bcryptjs from "bcryptjs";
 import { generateTokenAndSetCookie } from "../utils/generateToken";
 
+interface AuthenticatedRequest extends Request {
+  user?: any;
+}
+
 interface SignupRequest extends Request {
   body: {
     username: string;
@@ -123,6 +127,14 @@ try {
 }
 
 
-// async function authCheck(req:Request,res:Res){}
+async function authCheck(req:AuthenticatedRequest,res:Response){
+  try {
+    console.log("req.user:", req.user);
+    res.status(200).json({ success: true, user: req.user });
+  } catch (error) {
+    console.log("Error in authCheck controller", error.message);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+}
 
-export { signup ,login,logout};
+export { signup ,login,logout,authCheck};

@@ -7,10 +7,11 @@ import './index.css';
 import { Loader } from "lucide-react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuthStore } from "./store/authUser";
+import Navbar from "./components/Navbar";
 
 function App() {
   const { user, authCheck, isCheckingAuth } = useAuthStore();
-  const [isDarkMode, setIsDarkMode] = useState(false);
+
   
   useEffect(() => {
     authCheck();
@@ -28,35 +29,27 @@ function App() {
 
   
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    if (!isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  };
+  // const toggleDarkMode = () => {
+  //   setIsDarkMode(!isDarkMode);
+  //   if (!isDarkMode) {
+  //     document.documentElement.classList.add('dark');
+  //   } else {
+  //     document.documentElement.classList.remove('dark');
+  //   }
+  // };
 
   if (isCheckingAuth) {
     return <div>Loading...</div>; // Show a loading indicator while checking auth
   }
 
   return (
-    <>
-      <div className="bg-blue-500 text-white p-4">
-        <h1 className="text-3xl font-bold">Hello, Tailwind with TypeScript!</h1>
-        <button
-          onClick={toggleDarkMode}
-          className="p-2 text-sm text-white bg-blue-600 dark:bg-blue-800 rounded"
-        >
-          Toggle Dark Mode
-        </button>
-      </div>
+    <>    <Navbar/>
+   
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/login' element={!user ? <LoginPage /> : <Navigate to={"/"} />} />
         <Route path='/signup' element={!user ? <SignupPage /> : <Navigate to={"/"} />} />
-        <Route path='/data' element={ <DataPage /> } />
+        <Route path='/data' element={ user?<DataPage /> :<Navigate to={"/login"}/>} />
       </Routes>
     </>
   );

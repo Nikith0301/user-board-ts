@@ -12,7 +12,8 @@ interface Project {
 
 // Define the User interface
 interface User {
-  username: string;
+  _id?:string;
+  name: string;
   role: string;
   projects?: Project[];
 }
@@ -65,12 +66,12 @@ export const useAuthStore = create<AuthState>((set) => ({
       document.cookie = `user-jwt=${token}; path=/; max-age=${15 * 24 * 60 * 60}; SameSite=Lax`;
   
       // Destructure the necessary fields (username, role, and projects if available) from response.data.user
-      const { username, role, projects } = response.data.user;
-  
+      const { _id,name, role, projects } = response.data.user;
+  // console.log("authUser says",name,role,projects)
       // Set the full user object in the state (including optional projects)
-      set({ user: { username, role, projects: projects || [] }, isLoggingIn: false });
+      set({ user: {_id, name, role, projects: projects  }, isLoggingIn: false });
   
-      console.log("store says", { username, role, projects }); // Correct logging
+      console.log("store says", { _id,name, role, projects }); // Correct logging
   
       toast.success("Login successful");
     } catch (error: unknown) {
@@ -88,6 +89,12 @@ export const useAuthStore = create<AuthState>((set) => ({
   logout: async () => {
     set({ isLoggingOut: true });
     try {
+
+      console.log("Before",document.cookie);
+      // Clear cookie by setting it with an expired date
+document.cookie = "user-jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+console.log("After",document.cookie);
+
       await axios.post("http://localhost:5000/api/v1/auth/logout");
       set({ user: null, isLoggingOut: false });
       toast.success("Logged out successfully");
@@ -105,7 +112,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   authCheck: async () => {
     set({ isCheckingAuth: true });
     try {
-      const response = await axios.get("http://localhost:5000/api/v1/auth/authCheck");
+      const response = await axios.get("http://localhost:5000/api/v1/auth/authCheck",{  withCredentials: true });
       set({ user: response.data.user, isCheckingAuth: false });
     } catch (error: unknown) {
       set({ isCheckingAuth: false, user: null });

@@ -19,11 +19,13 @@ router.post("/add", protectRoute, authAddProject, addProject);
 
 router.get("/project/:userId/:projectId",protectRoute,authFindProject,searchProject)
 
-// router.get("/projects/:userId",protectRoute,authFindProject,searchAllProject)
+router.get("/projects/:userId",protectRoute,authFindProject,searchAllProject)
 // router.get("/projects/:userId",searchAllProject)
 router.delete("/delete",protectRoute,authDeleteProject,deleteProject)// this is using req.body
 
 router.delete("/delete/:userId/:projectId", protectRoute, authDeleteProject, deleteProject);//this is using params
+
+
 
 // Middleware to authorize project editing
 export function authAddProject(req: AuthenticatedRequest, res: Response, next: NextFunction): void {
@@ -42,7 +44,7 @@ console.log(userId)
 export function authFindProject(req: AuthenticatedRequest, res: Response, next: NextFunction): void {
 
     const { userId } = req.body; // Assuming projectId comes from the request body
-  console.log(userId)
+  console.log("search.route->",userId)
     if (!req.user  || !canViewProject(req.user, userId)) {
       res.status(401).json({ message: " search route says viewing Not Allowed" });
       return; // Early return to prevent further execution
