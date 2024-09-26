@@ -3,6 +3,7 @@ import axios from 'axios';
 import SideBar from '../components/SideBar';
 import { useAuthStore } from '../store/authUser';
 import useContent from "../store/content";
+import Navbar from '../components/Navbar';
 
 // Define the Project interface (if not already defined)
 interface Project {
@@ -59,9 +60,12 @@ const DataPage = () => {
 
 
   return (
-    <>
-      <SideBar />
-      <div className="ml-60 h-screen p-4 dark:bg-slate-600">
+    <div className='flex flex-col h-screen'>
+            <Navbar />
+      <div className='flex flex-grow'>
+            <SideBar />
+
+            <div className="flex-grow  h-screen p-4 dark:bg-slate-600">
         <h2 className="text-2xl font-bold mb-4 dark:text-gray-100">Project Data</h2>
 
         {/* <button 
@@ -91,8 +95,13 @@ const DataPage = () => {
         ) : (
           <p>No projects available</p>
         )}
+      </div> 
+      
       </div>
-    </>
+   
+     
+ 
+    </div>
   );
 };
 

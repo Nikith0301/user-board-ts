@@ -49,7 +49,7 @@ const SideBar = () => {
   }
 
   return (
-    <>
+    <div className=" bg-gray-200 dark:bg-gray-800">
       <button
         data-drawer-target="default-sidebar"
         data-drawer-toggle="default-sidebar"
@@ -75,7 +75,7 @@ const SideBar = () => {
 
       <aside
         id="default-sidebar"
-        className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+        className=" left-0 z-40  h-screen transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
@@ -117,7 +117,7 @@ const SideBar = () => {
           </ul>
         </div>
       </aside>
-    </>
+    </div>
   );
 };
 
