@@ -27,20 +27,10 @@ function App() {
 		);
 	}
 
-  
 
-  // const toggleDarkMode = () => {
-  //   setIsDarkMode(!isDarkMode);
-  //   if (!isDarkMode) {
-  //     document.documentElement.classList.add('dark');
-  //   } else {
-  //     document.documentElement.classList.remove('dark');
-  //   }
-  // };
-
-  if (isCheckingAuth) {
-    return <div>Loading...</div>; // Show a loading indicator while checking auth
-  }
+  // if (isCheckingAuth) {
+  //   return <div>Loading...</div>; // Show a loading indicator while checking auth
+  // }
 
   return (
     <>    
