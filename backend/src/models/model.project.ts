@@ -1,16 +1,18 @@
-import mongoose, { Document, Schema } from 'mongoose';
+// //This is on demo not on db
 
-interface IUser extends Document {
-    id:string
-    name: string;
-    userId:string
-   
-}
+// import mongoose, { Document, Schema } from 'mongoose';
 
-const projectSchema = new Schema<IUser>({
-    id: { type: String, required: true },
-    name: { type: String, required: true },  
-    userId: { type: String, required: true },//0->User role
+// interface IUser extends Document {
+//     id:string
+//     name: string;
+//     userId:string
    
-});
-export const Project = mongoose.model<IUser>('Project', projectSchema);
+// }
+
+// const projectSchema = new Schema<IUser>({
+//     id: { type: String, required: true },
+//     name: { type: String, required: true },  
+//     userId: { type: String, required: true },//0->User role
+   
+// });
+// export const Project = mongoose.model<IUser>('Project', projectSchema);

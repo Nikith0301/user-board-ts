@@ -5,6 +5,7 @@ interface IProject {
     id: string; // or mongoose.Types.ObjectId
     name: string; // Example field for project name
     description?: string; // Optional field for project description
+  
   }
 
 export interface IUser extends Document {
@@ -14,7 +15,10 @@ export interface IUser extends Document {
     password: string;
     role: string;
     // projects:Array<string>;
+
     projects: IProject[]; // Change to array of objects
+
+    
    
 }
 
@@ -30,9 +34,12 @@ const userSchema = new Schema<IUser>({
           id: { type: String, required: true }, // Unique ID for each project
           name: { type: String, required: true }, // Example field
           description: { type: String, required: false },
+          
         }],
         required: false,
       },
+
+     
    
 });
 export const User = mongoose.model<IUser>('User', userSchema);

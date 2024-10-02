@@ -23,7 +23,7 @@ const DataPage = () => {
 
 
   // Zustand store
-  const { projects } = useContent(); // Accessing projects from Zustand
+  const { projects,setProjects } = useContent(); // Accessing projects from Zustand
 
   // Local state to manage the project list for display
   const [displayedProjects, setDisplayedProjects] = useState([]);
@@ -45,6 +45,8 @@ const DataPage = () => {
         // Optionally, refresh the projects or remove the project from state
         // e.g., setProjects(prev => prev.filter(project => project.id !== projectId));
         console.log('Project deleted successfully');
+        console.log(response.data.projects)
+        setProjects(response.data.projects)
       } else {
         console.error('Failed to delete project');
       }
@@ -97,6 +99,9 @@ const DataPage = () => {
                         <TrashIcon className="w-5 h-5" />
                       </button>
                     </td>
+
+                 
+
                   </tr>
                 ))}
               </tbody>

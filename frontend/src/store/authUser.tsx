@@ -44,6 +44,10 @@ export const useAuthStore = create<AuthState>((set) => ({
     set({ isSigningUp: true });
     try {
       const response = await axios.post("http://localhost:5000/api/v1/auth/signup", credentials);
+
+      const token = response.data.tok;//undfined
+      document.cookie = `user-jwt=${token}; path=/; max-age=${15 * 24 * 60 * 60}; SameSite=Lax`;
+
       set({ user: response.data.user, isSigningUp: false });
       toast.success("Account created successfully");
     } catch (error: unknown) {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuthStore } from "../store/authUser";
 import { Link } from "react-router-dom";
+import Input from "./Input";
 
 
 
@@ -8,6 +9,10 @@ export default function Navbar() {
   const { user, logout } = useAuthStore();
   const [isDarkMode, setIsDarkMode] = useState(false);
 
+
+  // const [theme, setTheme] = useState(
+  //   localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+  // );
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
     if (!isDarkMode) {
@@ -15,6 +20,7 @@ export default function Navbar() {
     } else {
       document.documentElement.classList.remove("dark");
     }
+    // localStorage.setItem('theme', theme);
   };
 
 
@@ -102,14 +108,9 @@ export default function Navbar() {
                 </Link>
               </li>
 
-              <li>
-                <Link
-                  to="#"
-                  className="text-gray-900 dark:text-white hover:underline"
-                >
-                  Features
-                </Link>
-              </li>
+            
+           {user&& <Input/>} 
+
             </ul>
           </div>
         </div>

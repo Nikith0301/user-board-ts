@@ -8,6 +8,7 @@ import { Loader } from "lucide-react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuthStore } from "./store/authUser";
 import Navbar from "./components/Navbar";
+import Input from "./components/Input";
 
 function App() {
   const { user, authCheck, isCheckingAuth } = useAuthStore();
@@ -41,6 +42,7 @@ function App() {
         <Route path='/login' element={!user ? <LoginPage /> : <Navigate to={"/"} />} />
         <Route path='/signup' element={!user ? <SignupPage /> : <Navigate to={"/"} />} />
         <Route path='/data' element={ user?<DataPage /> :<Navigate to={"/login"}/>} />
+        <Route path='/input' element={ <Input /> }/>
       </Routes>
     </>
   );

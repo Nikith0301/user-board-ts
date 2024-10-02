@@ -7,9 +7,14 @@ interface Project {
   _id?: string;
 }
 
+interface ContentState{
+  projects:Project[];
+  setProjects:(projects:Project[])=>void;
+}
+
 // Zustand store for managing projects
-const useContent = create((set) => ({
-  projects: [] as Project[],  // Initialize projects as an empty array
+const useContent = create<ContentState>((set) => ({
+  projects: [] ,
 
   // Method to set projects in the store
   setProjects: (projects: Project[]) => set({ projects }),

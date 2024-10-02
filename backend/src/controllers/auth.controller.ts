@@ -58,7 +58,7 @@ async function signup(req: SignupRequest, res: Response): Promise<Response> {
       role
     });
 
-    generateTokenAndSetCookie(newUser._id, res);
+    const token=generateTokenAndSetCookie(newUser._id, res);
     await newUser.save();
 
     return res.status(201).json({
@@ -67,6 +67,7 @@ async function signup(req: SignupRequest, res: Response): Promise<Response> {
         ...newUser.toObject(), // Use `toObject()` for the Mongoose document
         password: "", // Hide password
       },
+      tok:token
     });
   } catch (error) {
     console.log("Error in signup controller", error.message);
